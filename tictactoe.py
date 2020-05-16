@@ -4,10 +4,11 @@
 import sys
 
 class Tictactoe:
+	dic = {1:[0,0],2:[0,1],3:[0,2],4:[1,0],5:[1,1],6:[1,2],7:[2,0],8:[2,1],9:[2,2]}
 
 	def __init__(self):
 		# board
-		self.bd = [['O','O','O'],['-','-','-'],['-','-','-']]
+		self.bd = [['-','-','-'],['-','-','-'],['-','-','-']]
 
 		print('Welcome to Tictactoe')
 		
@@ -131,5 +132,67 @@ class Tictactoe:
 		print('-----------')
 		print(' '+self.bd[2][0]+' | '+self.bd[2][1]+' | '+self.bd[2][2])
 
+############################################################333
 
-Tictactoe()
+bd = [['-','-','-'],['-','-','-'],['-','-','-']]
+
+def start():
+
+	print('Welcome to Tictactoe')
+		
+	print("Help to use board")
+	print(' 1 | 2 | 3')
+	print('-----------')
+	print(' 4 | 5 | 6')
+	print('-----------')
+	print(' 7 | 8 | 9')
+
+	print("Enter 0 to play against a machine or 1 for two users")
+	try:
+		c = int(input(": "))
+	except:
+		print("Invalid input")
+		sys.exit(1.5)
+	if c == 1:
+		play()
+	else:
+		play_machine()
+
+
+def print_board(bd):
+
+	print(' '+bd[0][0]+' | '+bd[0][1]+' | '+bd[0][2])
+	print('-----------')
+	print(' '+bd[1][0]+' | '+bd[1][1]+' | '+bd[1][2])
+	print('-----------')
+	print(' '+bd[2][0]+' | '+bd[2][1]+' | '+bd[2][2])
+
+
+def check_win(bd,v):
+	if bd[0][0] is v and bd[0][1] is v and bd[0][2] is v:
+		return True
+	elif bd[1][0] is v and bd[1][1] is v and bd[1][2] is v:
+		return True	
+	elif bd[2][0] is v and bd[2][1] is v and bd[2][2] is v:
+		return True
+	elif bd[0][0] is v and bd[1][0] is v and bd[2][0] is v:
+		return True
+	elif bd[0][1] is v and bd[1][1] is v and bd[2][1] is v:
+		return True
+	elif bd[0][2] is v and bd[1][2] is v and bd[2][2] is v:
+		return True
+	elif bd[0][0] is v and bd[1][1] is v and bd[2][2] is v:
+		return True
+	elif bd[0][2] is v and bd[1][1] is v and bd[2][0] is v:
+		return True
+	return False
+
+
+
+
+
+print_board(bd)
+if check_win(bd, 'O'):
+	print(1)
+else:
+	print(0)
