@@ -2,6 +2,7 @@
 # Author:	@BlankGodd
 
 import sys
+import random
 
 class Tictactoe:
 
@@ -219,7 +220,7 @@ class Tictactoe:
 		bd = self.bd
 		pos = 0
 		if player == 'p1':
-			pos = int(input("Player1: "))
+			pos = int(input("Player: "))
 		else:
 			pos = random.randint(1, 10)
 
