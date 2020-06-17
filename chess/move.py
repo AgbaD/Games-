@@ -7,7 +7,7 @@ from board import Board
 class Piece:
 
 	def __init__(self):
-		pass
+		position = Board._position
 
 	def move_pawn(self,a,b):
 		# check if pawn in position a,b-1
