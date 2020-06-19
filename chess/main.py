@@ -3,7 +3,7 @@
 # main
 
 from board import Board
-from move import Piece
+from move import Move
 
 positions = [
 			 'a1', 'b1', 'c1', 'd1', 'e1', 'f1', 'g1', 'h1',
@@ -22,86 +22,86 @@ pieces = [
 			"R","N","B","K","Q","B","N","R"
 ]
 
-def start():
-	bd = Board()
-	board = bd.board
-	bd.print_board()
-	print('Player1 is white, player2 is black(N.)')
-	count = 0
-	win = False
-	player = ""
-	while True:
-		i = 0
-		if count == 0 or count % 2 == 0:
-			i = 1
+class Start:
+
+	def __init__(self):
+		self.bd = Board()
+		self.board = self.bd.board
+		self.bd.print_board()
+		self.move_bot = Move(self.board)
+		print('Player1 is white, player2 is black(N.)')
+		count = 0
+		player = ""
+		while True:
+			i = 0
+			if count == 0 or count % 2 == 0:
+				i = 1
+			else:
+				i = 2
+			inp = self.get_input(i)
+			p,y = self.check_input(inp)
+			self.move(p,y)
+			self.bd.print_board()
+			count += 1
+			# check win
+
+	def get_input(self,i):
+		inp = None
+		while not inp:
+			print('Player{} '.format(i))
+			inp = input(': ')
+			if len(inp) == 3 or len(inp) == 4:
+				break
+			else:
+				print('Invalid input')
+				inp = None
+		return inp
+
+	def check_input(self,inp):
+		p,y = None,None
+		if len(inp) == 3:
+			p = inp[0]
+			y = inp[-2] + inp[-1]
+
+			if p in pieces:
+				pass
+			else:
+				print("Invalid move")
+				return None
+
+			if y in positions:
+				pass
+			else:
+				print("Invalid move")
+				return None
+
 		else:
-			i = 2
-		inp = get_input(i)
-		move(board,inp)
-		# check win
+			p = inp[0] + inp[1]
+			y = inp[-2] + inp[-1]
 
-def move(board,inp):
-	p,y = check_input(inp)
-	# make the move
-	piece = Piece(board)
-	if p == 'p':
-		piece.move_pawn_white(y)
-	elif p == 'p.':
-		piece.move_pawn_black(y)
-	elif p == 'R':
-		pass
+			if p in pieces:
+				pass
+			else:
+				print("Invalid move")
+				return None
 
-def check_input(inp):
-	p,y = None,None
-	if len(inp) == 3:
-		p = inp[0]
-		y = inp[1] + inp[2]
+			if y in positions:
+				pass
+			else:
+				print("Invalid move")
+				return None
 
-		if p in pieces:
+		return p,y
+
+	def move(self,p,y):
+		if p == 'p' or p == 'p.':
+			self.move_bot.move_pawn(p,y)
+		if p == 'R' or p == 'R.':
 			pass
-		else:
-			print("Invalid move")
-			return None
-
-		if y in positions:
-			pass
-		else:
-			print("Invalid move")
-			return None
-
-	else:
-		p = inp[0] + inp[1]
-		y = inp[2] + inp[3]
-
-		if p in pieces:
-			pass
-		else:
-			print("Invalid move")
-			return None
-
-		if y in positions:
-			pass
-		else:
-			print("Invalid move")
-			return None
-
-	return p,y
 
 	
-def get_input(i):
-	inp = None
-	while not inp:
-		print('Player{} '.format(i))
-		inp = input(': ')
-		if len(inp) == 3 or len(inp) == 4:
-			break
-		else:
-			print('Invalid input')
-			inp = None
-	return inp
-
 
 if __name__ == "__main__":
-	start()
+	Start()
 
 
