@@ -6,7 +6,8 @@ from main import Board_
 
 class Piece:
 
-	positions ={'a1' : (7,1), 'a2' : (6,1), 'a3' : (5,1),
+	positions = {
+			'a1' : (7,1), 'a2' : (6,1), 'a3' : (5,1),
 			'a4' : (4,1), 'a5' : (3,1), 'a6' : (2,1),
 			'a7' : (1,1), 'a8' : (0,1), 
 
@@ -39,13 +40,107 @@ class Piece:
 			'h7' : (1,8), 'h8' : (0,8)
 	}
 
-	def __init__(self):
-		self.position = Piece._position
-		self.board = Board_.board
+	alpha = {
+			  'a':1,'b':2,'c':3,'d':4,'e':5,'f':6,'g':7,'h':8,
+			   1:'a',2:'b',3:'c',4:'d',5:'e',6:'f',7:'g',8:'h'
+	}	
 
-	def move_pawn(self,ab):
+	def __init__(self,board):
+		self.position = Piece._positions
+		self.board = board
+		self.alpha = Piece._alpha
+
+	def move_pawn_white(self,ab):
 		# check if pawn in position a,b-1
 		# move to pos a,b
+		
+		# conditions for move
+		cond = False
+		ctype  = 0.0
+		# ab = b4
 
-		pos = self.position[ab]
+		# cond 1
+		n = int(ab[-1])
+		n -= 1
+		m = ab[0]
+		ind = self.alpha[m]
+		x,y,prev1,prev2 = None,None,None,None
+		try:
+			x = self.alpha[ind+1]
+			y = self.alpha[ind-1]
+		except:
+			pass
+		if x:
+			x = self.alpha[x]
+			prev1 = x+str(n)
+		if y:
+			y = self.alpha[y]
+			prev2 = y+str(n)
+
+		if prev1:
+			prev = self.position[prev1]
+			a,b = prev
+			if self.board[a][b] == 'p':
+				cond = True
+				ctype = 1.1
+		if not cond:	
+			if prev2:
+				prev = self.position[prev2]
+				a,b = prev
+				if self.board[a][b] == 'p':
+					cond = True
+					ctype = 1.2
+
+		# cond 2
+		if not cond:
+			n = int(ab[-1])
+			n -= 1
+			prev_pos = ab[0] + str(n) 
+			prev = self.position[prev_pos]
+			a,b = prev
+			if self.board[a][b] == 'p':
+				cond = True
+				ctype = 2.0
+
+
+		# cond 3
+		"""if not cond:
+			n = int(ab[-1])
+			n -= 2
+			prev_pos = ab[0] + str(n) 
+			prev = self.position[prev_pos]
+			a,b = prev
+			if self.board[a][b] == 'p':
+				cond = True
+		"""
+
+		if cond:
+			if ctype == 1.1:
+				new_pos = self.position[ab]
+				prev_pos = self.position[prev1]
+				a,b = new_pos
+				c,d = prev_pos
+				self.board[a][b] = 'p'
+				self.board[c][d] = ' '
+				print('p{}x{}'.format(prev_pos,new_pos))
+			elif ctype == 1.2:
+				new_pos = self.position[ab]
+				prev_pos = self.position[prev2]
+				a,b = new_pos
+				c,d = prev_pos
+				self.board[a][b] = 'p'
+				self.board[c][d] = ' '
+				print('p{}x{}'.format(prev_pos,new_pos))
+			elif ctype == 2.0:
+				new_pos = self.position[ab]
+				n = int(ab[-1])
+				n -= 1
+				prev = ab[0] + str(n) 
+				prev_pos = self.position[prev]
+				a,b = new_pos
+				c,d = prev_pos
+				self.board[a][b] = 'p'
+				self.board[c][d] = ' '
+				print('p{}'.format(new_pos))
+
 
