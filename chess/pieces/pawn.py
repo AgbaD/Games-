@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # Author:   @BlankGodd
-# moving pieces
+# moving pawn
 
 
 class Pawn:
