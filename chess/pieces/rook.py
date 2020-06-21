@@ -21,7 +21,44 @@ class Rook:
 				cond = self.move_black(ab,player)
 				return cond
 		else:
-			pass
+			if player == 1: #white
+				x = self.board[a][b]
+				if x[-1] == ' ':
+					return False
+				cond = self.white_take(ab,player)
+				return cond
+			else: # black
+				x = self.board[a][b]
+				if x[-1] == '.':
+					return False
+				cond = self.black_take(ab,player)
+				return cond
+			
+	def white_take(self,ab,player):
+		cond = self.check_vert(ab,player)
+		if not cond:
+			cond = self.check_hori(ab,player)
+		if cond:
+			a,b = self.position[ab]
+			c,d = self.position[cond]
+			self.board[a][b] = 'R '
+			self.board[c][d] = '  '
+			print('r{}x{}'.format(cond,ab))
+			return True
+		return cond
+
+	def black_take(self,ab,player):
+		cond = self.check_vert(ab,player)
+		if not cond:
+			cond = self.check_hori(ab,player)
+		if cond:
+			a,b = self.position[ab]
+			c,d = self.position[cond]
+			self.board[a][b] = 'R.'
+			self.board[c][d] = '  '
+			print('r{}x{}'.format(cond,ab))
+			return True
+		return cond
 
 	def move_white(self,ab,player):
 		cond = self.check_vert(ab,player)
@@ -33,7 +70,6 @@ class Rook:
 			self.board[a][b] = 'R '
 			self.board[c][d] = '  '
 			return True
-		print('Invalid move')
 		return cond
 
 	def move_black(self,ab,player):
@@ -46,7 +82,6 @@ class Rook:
 			self.board[a][b] = 'R.'
 			self.board[c][d] = '  '
 			return True
-		print('Invalid move')
 		return cond
 
 	def check_hori(self,ab,player):

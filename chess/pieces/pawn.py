@@ -2,6 +2,9 @@
 # Author:   @BlankGodd
 # moving pawn
 
+# one more thing to write
+# when a pawn gets to the extreme end, it changes
+
 from pieces.positions import Pos
 
 class Pawn:	

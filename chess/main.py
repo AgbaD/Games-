@@ -26,11 +26,19 @@ pieces = [
 class Start:
 
 	def __init__(self):
+		print("Welcome to M_Chess")
+		print('Multiplayer chess')
+		print()
+		print('Player 1 takes the white pieces')
+		print("White pieces are the ones on the lower part with single letters")
+		print()
+		print("Player 2 takes the black pieces")
+		print("Black pieces are the ones on the upper part wit periods by the side")
+		print()
 		self.bd = Board()
 		self.board = self.bd.board
 		self.bd.print_board()
 		self.move_bot = Move(self.board)
-		print('Player1 is white, player2 is black(N.)')
 		count = 0
 		player = ""
 		while True:
