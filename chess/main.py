@@ -33,7 +33,7 @@ class Start:
 		print("White pieces are the ones on the lower part with single letters")
 		print()
 		print("Player 2 takes the black pieces")
-		print("Black pieces are the ones on the upper part wit periods by the side")
+		print("Black pieces are the ones on the upper part with periods by the side")
 		print()
 		self.bd = Board()
 		self.board = self.bd.board
