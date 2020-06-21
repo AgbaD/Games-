@@ -19,7 +19,8 @@ pieces = [
 			"p.","p.","p.","p.","p.","p.","p.","p.",
 			"R.","N.","B.","K.","Q.","B.","N.","R.",
 			"p","p","p","p","p","p","p","p",
-			"R","N","B","K","Q","B","N","R"
+			"R","N","B","K","Q","B","N","R",
+			'r','n','b','k','q','b','n','r'
 ]
 
 class Start:
@@ -40,7 +41,14 @@ class Start:
 				i = 2
 			inp,player = self.get_input(i)
 			p,y = self.check_input(inp)
-			self.move(p,y,player)
+			while not p:
+				inp,player = self.get_input(i)
+				p,y = self.check_input(inp)
+			move = self.move(p,y,player)
+			while not move:
+				inp,player = self.get_input(i)
+				p,y = self.check_input(inp)
+				move = self.move(p,y,player)
 			self.bd.print_board()
 			count += 1
 			# check win
@@ -67,22 +75,23 @@ class Start:
 			pass
 		else:
 			print("Invalid move")
-			return None
+			return None, None
 
 		if y in positions:
 			pass
 		else:
 			print("Invalid move")
-			return None
+			return None, None
 		return p,y
 
 	def move(self,p,y,player):
+		cond = False
 		if p == 'p':
-			self.move_bot.move_pawn(p,y,player)
-		if p == 'R' or p == 'R.':
-			pass
-
-	
+			cond = self.move_bot.move_pawn(p,y,player)
+		if p == 'R' or p == 'r':
+			cond = self.move_bot.move_rook(p,y,player)
+		
+		return cond
 
 if __name__ == "__main__":
 	Start()
