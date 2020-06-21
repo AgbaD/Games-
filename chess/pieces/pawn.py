@@ -49,46 +49,87 @@ class Pawn:
 		self.board = board
 		self.alpha = Pawn._alpha
 
-	def move(self,p,ab):
+	def move(self,p,ab,player):
 		a,b = self.position[ab]
+		val = ab[0]
 		if self.board[a][b] == "  ":
-			if p == 'p':
-				self.move_white(ab)
+			if player == 1:
+				ini = self.check_ini_white(val)
+				if ini:
+					m = self.move_white_ini(ab)
+				else:
+					pass
+				return m
 			else:
-				self.move_black(ab)
+				ini = self.check_ini_black(val)
+				if ini:
+					n = self.move_black_ini(ab)
+				else:
+					pass
+				return n
 		else:
 			pass
 
-	def move_white(self,ab):
+	def check_ini_white(self,val):
+		x = '2'
+		v = val+x
+		a,b = self.position[v]
+		if self.board[a][b] == 'p ':
+			return True
+		return False
+
+	def check_ini_black(self,val):
+		x = '7'
+		v = val+x
+		a,b = self.position[v]
+		if self.board[a][b] == 'p ':
+			return True
+		return False
+
+	def move_white_ini(self,ab):
 		# ab = b3
 		prev_pos = ""
-		for i in range(7):
-			n = int(ab[-1])
-			n -= 1
-			n = str(n)
-			pos = ab[0] + n
+		cond = False
+		n = int(ab[-1])
+		for i in range(1,3):
+			j = n-i
+			j = str(j)
+			pos = ab[0] + j
 			a,b = self.position[pos]
 			if self.board[a][b] == 'p ':
 				prev_pos = pos
+				cond = True
 				break
-		a,b = self.position[ab]
-		c,d = self.position[pos]
-		self.board[a][b] = 'p '
-		self.board[c][d] = '  '
+		if cond:
+			a,b = self.position[ab]
+			c,d = self.position[prev_pos]
+			self.board[a][b] = 'p '
+			self.board[c][d] = '  '
+		else:
+			print('Invalid input')
+		return cond
 
-	def move_black(self,ab):
+	def move_black_ini(self,ab):
 		# ab = b3
 		prev_pos = ""
-		for i in range(7):
-			n = int(ab[-1])
-			n += 1
-			n = str(n)
-			pos = ab[0] + n
+		cond = False
+		n = int(ab[-1])
+		for i in range(1,3):
+			j =n+i
+			j = str(j)
+			pos = ab[0] + j
 			a,b = self.position[pos]
 			if self.board[a][b] == 'p.':
 				prev_pos = pos
+				cond = True
 				break
-		a,b = self.position[ab]
-		c,d = self.position[pos]
-		self.board[a][b] = 'p.'
-		self.board[c][d] = '  '
+		if cond:
+			a,b = self.position[ab]
+			c,d = self.position[prev_pos]
+			self.board[a][b] = 'p.'
+			self.board[c][d] = '  '
+		else:
+			print('Invalid input')
+		return cond
+
+

@@ -38,9 +38,9 @@ class Start:
 				i = 1
 			else:
 				i = 2
-			inp = self.get_input(i)
+			inp,player = self.get_input(i)
 			p,y = self.check_input(inp)
-			self.move(p,y)
+			self.move(p,y,player)
 			self.bd.print_board()
 			count += 1
 			# check win
@@ -50,52 +50,35 @@ class Start:
 		while not inp:
 			print('Player{} '.format(i))
 			inp = input(': ')
-			if len(inp) == 3 or len(inp) == 4:
+			if len(inp) == 3:
 				break
 			else:
 				print('Invalid input')
 				inp = None
-		return inp
+		return inp,i
 
 	def check_input(self,inp):
 		p,y = None,None
-		if len(inp) == 3:
-			p = inp[0]
-			y = inp[-2] + inp[-1]
+		
+		p = inp[0]
+		y = inp[-2] + inp[-1]
 
-			if p in pieces:
-				pass
-			else:
-				print("Invalid move")
-				return None
-
-			if y in positions:
-				pass
-			else:
-				print("Invalid move")
-				return None
-
+		if p in pieces:
+			pass
 		else:
-			p = inp[0] + inp[1]
-			y = inp[-2] + inp[-1]
+			print("Invalid move")
+			return None
 
-			if p in pieces:
-				pass
-			else:
-				print("Invalid move")
-				return None
-
-			if y in positions:
-				pass
-			else:
-				print("Invalid move")
-				return None
-
+		if y in positions:
+			pass
+		else:
+			print("Invalid move")
+			return None
 		return p,y
 
-	def move(self,p,y):
-		if p == 'p' or p == 'p.':
-			self.move_bot.move_pawn(p,y)
+	def move(self,p,y,player):
+		if p == 'p':
+			self.move_bot.move_pawn(p,y,player)
 		if p == 'R' or p == 'R.':
 			pass
 
