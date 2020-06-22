@@ -5,6 +5,7 @@
 from pieces.pawn import Pawn
 from pieces.rook import Rook
 from pieces.bishop import Bishop
+from pieces.king import King
 
 
 class Move:
@@ -27,6 +28,13 @@ class Move:
 
 	def move_bishop(self,p,y,player):
 		piece = Bishop(self.board)
+		move = piece.move(p,y,player)
+		if not move:
+			print('Invalid move')
+		return move
+
+	def move_king(self,p,y,player):
+		piece = King(self.board)
 		move = piece.move(p,y,player)
 		if not move:
 			print('Invalid move')
