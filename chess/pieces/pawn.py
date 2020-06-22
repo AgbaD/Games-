@@ -17,39 +17,35 @@ class Pawn:
 	def move(self,p,ab,player):
 		a,b = self.position[ab]
 		val = ab[0]
+		m = False
 		num = int(ab[-1])
 		if self.board[a][b] == "  ":
 			if player == 1:
 				if num < 2:
 					return False
-				m = False
 				ini = self.check_ini_white(val)
 				if ini:
 					m = self.move_white_ini(ab)
 				else:
 					m = self.move_white(ab)
-				return m
 			else:
 				if num > 7:
 					return False
-				n = False
 				ini = self.check_ini_black(val)
 				if ini:
-					n = self.move_black_ini(ab)
+					m = self.move_black_ini(ab)
 				else:
-					n = self.move_black(ab)
-				return n
+					m = self.move_black(ab)
 		else:
-			o = False
 			if player == 1:
 				if num < 2:
 					return False
-				o = self.white_take_piece(ab)
+				m = self.white_take_piece(ab)
 			else:
 				if num > 7:
 					return False
-				o = self.black_take_piece(ab)
-			return o
+				m = self.black_take_piece(ab)
+		return m
 
 	def white_take_piece(self,ab):
 		prev_pos = ""

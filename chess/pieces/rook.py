@@ -43,7 +43,7 @@ class Rook:
 			c,d = self.position[cond]
 			self.board[a][b] = 'R '
 			self.board[c][d] = '  '
-			print('r{}x{}'.format(cond,ab))
+			print('R{}x{}'.format(cond,ab))
 			return True
 		return cond
 
@@ -56,7 +56,7 @@ class Rook:
 			c,d = self.position[cond]
 			self.board[a][b] = 'R.'
 			self.board[c][d] = '  '
-			print('r{}x{}'.format(cond,ab))
+			print('R.{}x{}'.format(cond,ab))
 			return True
 		return cond
 

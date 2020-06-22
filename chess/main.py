@@ -26,6 +26,7 @@ pieces = [
 class Start:
 
 	def __init__(self):
+		print()
 		print("Welcome to M_Chess")
 		print('Multiplayer chess')
 		print()
@@ -98,7 +99,10 @@ class Start:
 			cond = self.move_bot.move_pawn(p,y,player)
 		if p == 'R' or p == 'r':
 			cond = self.move_bot.move_rook(p,y,player)
-		
+		if p == 'B' or p == 'b':
+			cond = self.move_bot.move_bishop(p,y,player)		
+		if p == 'K' or p == 'k':
+			cond = self.move_bot.move_king(p,y,player)
 		return cond
 
 if __name__ == "__main__":
