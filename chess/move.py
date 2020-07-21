@@ -6,13 +6,17 @@ from pieces.pawn import Pawn
 from pieces.rook import Rook
 from pieces.bishop import Bishop
 from pieces.king import King
+from pieces.queen import Queen
 
 
 class Move:
 
 	def __init__(self,board):
 		self.board = board
-
+		# before every move, look if king in check
+	
+	# p = piece
+	# y = position
 	def move_pawn(self,p,y,player):
 		# make the move
 		piece = Pawn(self.board)
@@ -40,4 +44,10 @@ class Move:
 			print('Invalid move')
 		return move
 
+	def move_queen(self,p,y,player):
+		piece = Queen(self.board)
+		move = piece.move(p,y,player)
+		if not move:
+			print('Invalid move')
+		return move
 
